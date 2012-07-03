@@ -45,10 +45,16 @@ S3
 
 To use an S3 remote use ``launchbox --bucket your.bucket.name``
 
-In the case of an S3 remote ``launchbox`` will look for keys of the form
-``cookbooks/<cookbook>/<version>/<cookbook>.tar.gz`` for the cookbook
-contents, and ``cookbooks/<cookbook>/<version>/<cookbook>.json`` for the
-metadata. For determining the available versions ``launchbox`` will list
+In the case of an S3 remote ``launchbox`` will look for the following
+keys when downloading cookbooks:
+
+::
+
+    contents: cookbooks/<cookbook>/<version>/<cookbook>.tar.gz
+    metadata: cookbooks/<cookbook>/<version>/<cookbook>.json
+
+
+For determining the available versions ``launchbox`` will list
 the bucket and find all available versions.
 
 HTTP
@@ -57,26 +63,26 @@ HTTP
 To use an HTTP(S) remote use
 ``lauchbox --url http://your/bucket/server``
 
-In the case of an HTTP(s) remote ``launchbox`` will download cookbook
-data from
-``http://example.com/cookbooks/<cookbook>/<version>/<cookbook>.tar.gz``,
-cookbook metadata from
-``http://example.com/cookbooks/<cookbook>/<version>/<cookbook>.tar.gz``
-and the list of available cookbook versions from
-``http://example.com/cookbooks/<cookbook>/versions.json``
+In the case of an HTTP(s) remote ``launchbox`` will use the following URLs:
+
+::
+
+    contents: <URL>/<cookbook>/<version>/<cookbook>.tar.gz
+    metadata: <URL>/<cookbook>/<version>/<cookbook>.json
+    versions: <URL>/<cookbook>/versions.json
+
 
 Output
 ------
 
 After running launchbox the target folder will contain a JSON file with
 the role metadata and tar.gz containing all the necessary cookbooks for
-that role.
+that role. It will also output the ``SHA-256`` of these two files.
+
+You can supply these two files directly to ``chef-solo`` using ``-j
+<path/to/role.json>`` and ``-r </path/to/role.tar.gz>``
 
 Usage
 -----
 
-For detailed used information run
-
-::
-
-    launchbox -h
+For detailed usage information please run ``launchbox -h``

@@ -1,14 +1,27 @@
+import os
 from setuptools import setup
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='launchbox',
       version='0.1',
-      description='Packager for chef-solo',
+      description='Packaging and dependency resolution for chef-solo cookbooks',
+      long_description=read('README.rst'),
+      keywords="chef chef-solo dependency package bundle",
+      url='http://github.com/SimpleFinance/launchbox',
       author='Cosmin Stejerean',
       author_email='cosmin@offbytwo.com',
       license='Apache License 2.0',
-      url='http://github.com/SimpleFinance/launchbox',
       packages=['launchbox'],
-      scripts=['bin/launchbox', 'bin/publish-cookbook'],
+      scripts=['bin/launchbox'],
       tests_require=open('test-requirements.txt').readlines(),
-      install_requires=open('requirements.txt').readlines()
+      install_requires=open('requirements.txt').readlines(),
+      classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
+        'License :: OSI Approved :: Apache Software License',
+        'Topic :: System :: Software Distribution',
+        'Topic :: Utilities'
+        ]
      )

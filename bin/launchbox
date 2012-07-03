@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+"""launchbox
+
+Usage:
+  launchbox [options] clean
+  launchbox --bucket=BUCKET [(--access-key=ACCESS_KEY --secret-key=SECRET_KEY)] [options] (deps | package) [<role>]...
+  launchbox --url=URL [options] (deps | package) [<role>]...
+  launchbox -h | --help
+  launchbox -v | --version
+
+Options:
+  -h --help                     Show this screen.
+  -v --version                  Show the version.
+
+  -C --cache-dir=CACHE_DIR      Directory in which to cache downloaded assets [default: ./cache].
+  --target=TARGET_DIR           Directory in which to store the packaged assets [default: ./target].
+  --source=SOURCE_DIR           Source directory holding cookbooks and mixing [default: ./src].
+
+  -b --bucket=BUCKET            Use an S3 bucket endpoint.
+  -a --access-key=ACCESS_KEY    AWS Access Key Id for S3 access. [default: $AWS_ACCESS_KEY_ID].
+  -s --secret-key=SECRET_KEY    AWS Secret Access Key for S3 acces. [default: $AWS_SECRET_ACCESS_KEY].
+
+  -u --url=URL                  URL for a generic HTTP endpoint
+"""
+
+from docopt import docopt
+
+from launchbox import __version__, app
+
+params = docopt(__doc__, version='Launchbox %s' % __version__)
+app.run(params)

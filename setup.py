@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='Lunchbox',
+setup(name='launchbox',
       version='0.1',
       description='Packager for chef-solo',
       author='Cosmin Stejerean',
